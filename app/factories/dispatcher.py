@@ -3,12 +3,13 @@ from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.utils.callback_answer import CallbackAnswerMiddleware
 from redis.asyncio import Redis
 
-from .redis import create_redis
-from .session_pool import create_session_pool
+from app.app_config import AppConfig
 from app.telegram_bot.middlewares.outer.database import DBSessionMiddleware
 from app.telegram_bot.middlewares.outer.user import UserMiddleware
 from app.utils import msgspec_json as mjson
-from app.app_config import AppConfig
+
+from .redis import create_redis
+from .session_pool import create_session_pool
 
 
 def create_dispatcher(config: AppConfig) -> Dispatcher:

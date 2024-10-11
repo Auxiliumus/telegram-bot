@@ -1,10 +1,5 @@
-from app.app_config import (
-    AppConfig,
-    TelegramConfig,
-    PostgresConfig,
-    RedisConfig,
-    MinioConfig,
-)
+from app.app_config import (AppConfig, MinioConfig, PostgresConfig,
+                            RedisConfig, TelegramConfig)
 
 
 def create_app_config() -> AppConfig:

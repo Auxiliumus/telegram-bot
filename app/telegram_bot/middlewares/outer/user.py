@@ -31,7 +31,9 @@ class UserMiddleware(BaseMiddleware):
         repository: GeneralRepository,
         uow: UoW,
     ) -> User:
-        user: User | None = await repository.users.get_by_id(telegram_id=aiogram_user.id)
+        user: User | None = await repository.users.get_by_id(
+            telegram_id=aiogram_user.id,
+        )
         if user is None:
             user = await repository.users.create(aiogram_user=aiogram_user, uow=uow)
         return user
