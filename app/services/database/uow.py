@@ -6,7 +6,7 @@ from app.models.base import Base
 class UoW:
     _session: AsyncSession
 
-    __slots__ = ("_session",)
+    __slots__ = ('_session',)
 
     def __init__(self, session: AsyncSession) -> None:
         self._session = session
