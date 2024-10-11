@@ -12,8 +12,8 @@ class BaseSettings(_BaseSettings):
     )
 
 
-class BotConfig(BaseSettings, env_prefix='BOT_'):
-    token: SecretStr
+class TelegramConfig(BaseSettings, env_prefix='TELEGRAM_'):
+    bot_token: SecretStr
     admin_id: int
 
 
@@ -24,7 +24,7 @@ class PostgresConfig(BaseSettings, env_prefix='POSTGRES_'):
     db: str
     port: int
 
-    def build_dsn(self) -> URL:
+    def build_url(self) -> URL:
         return URL.create(
             drivername='postgresql+asyncpg',
             username=self.user,
@@ -40,6 +40,9 @@ class RedisConfig(BaseSettings, env_prefix='REDIS_'):
     db: int
     port: int
 
+    def build_url(self) -> str:
+        return f'redis://{self.host}:{self.port}/{self.db}'
+
 
 class MinioConfig(BaseSettings, env_prefix='MINIO_'):
     host: str
@@ -51,7 +54,7 @@ class MinioConfig(BaseSettings, env_prefix='MINIO_'):
 
 
 class AppConfig(BaseModel):
-    bot: BotConfig
+    telegram: TelegramConfig
     postgres: PostgresConfig
     redis: RedisConfig
     minio: MinioConfig
